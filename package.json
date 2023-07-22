@@ -2,6 +2,12 @@
   "name": "@hyfi06/models",
   "version": "0.1.0",
   "description": "",
+  "author": "Héctor Olvera Vital <hector@olvitec.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@hyfi06/str-utils": "^1.0.0",
+    "@hyfi06/unam-careers": "^1.0.1"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
@@ -26,8 +32,6 @@
     "unam",
     "fc"
   ],
-  "author": "Héctor Olvera Vital <hector@olvitec.com>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/hyfi06/models-js/issues"
   },
