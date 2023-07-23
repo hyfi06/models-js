@@ -13,7 +13,7 @@ The `Person` class represents a person with various personal details.
 - `ap2` (string): The person's second last name.
 - `degree` (string, optional): The person's degree.
 - `email` (string, optional): The person's email.
-- `emails` (string[], optional): The person's emails.
+- `emails` (string[]): The person's emails.
 - `_curp` (Curp, optional): The person's CURP.
 - `_gender` (Gender, optional): The person's gender.
 - `charge` (string, optional): The person's charge.

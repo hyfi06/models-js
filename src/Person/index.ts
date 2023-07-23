@@ -13,7 +13,7 @@ import {
  * @property {string} ap2 - The person's second last name.
  * @property {string} [degree] - The person's degree.
  * @property {string} [email] - The person's email.
- * @property {string[]} [emails] - The person's emails.
+ * @property {string[]} emails - The person's emails.
  * @property {Curp} [_curp] - The person's CURP.
  * @property {Gender} [_gender] - The person's gender.
  * @property {string} [charge] - The person's charge.
@@ -38,7 +38,7 @@ class Person {
   ap2: string;
   degree?: string;
   email?: string;
-  emails?: string[];
+  emails: string[];
   _curp?: Curp;
   _gender?: Gender;
   charge?: string;
@@ -90,14 +90,17 @@ class Person {
     if (degree) this.degree = sanitizeStr(degree);
     if (charge) this.charge = sanitizeStr(charge);
     if (email) this.email = sanitizeStr(email).toLowerCase();
-    if (emails) {
-      this.emails = emails.map((email) => sanitizeStr(email).toLowerCase());
-      if (this.email && !this.emails.includes(this.email)) {
-        this.emails.unshift(this.email);
-      } else if (!this.email && this.emails.length) {
-        this.email = this.emails[0];
-      }
+
+    this.emails = (emails || [])
+      .map((emailItem) => sanitizeStr(emailItem).toLowerCase())
+      .filter((emailItem) => Boolean(emailItem))
+      .filter((emailItem, idx, arr) => idx == arr.indexOf(emailItem));
+    if (this.email && !this.emails.includes(this.email)) {
+      this.emails.unshift(this.email);
+    } else if (!this.email && this.emails.length) {
+      this.email = this.emails[0];
     }
+
     if (phone) this.phone = phone;
 
     if (curp) {
@@ -135,6 +138,7 @@ class Person {
   get degreeFullNameByName(): string {
     return sanitizeJoin([this.degree || 'C.', this.fullNameByName]);
   }
+
   get degreeFullNameByLastName(): string {
     return sanitizeJoin([this.degree || 'C.', this.fullNameByLastName]);
   }
